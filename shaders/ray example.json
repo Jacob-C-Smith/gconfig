@@ -1,0 +1,11 @@
+{
+    "$schema" : "https://schema.g10.app/shader.json",
+    "name" : "ray example",
+    "type" : "ray",
+    "ray generation shader path" : "G10/shaders/ray/ray example/rgen.spv",
+    "ray generation shader source path" : "ray/ray example/rgen.glsl",
+    "ray closest hit shader path" : "G10/shaders/ray/ray example/rchit.spv",
+    "ray closest hit shader source path" : "ray/ray example/rchit.glsl",
+    "ray miss shader path" : "G10/shaders/ray/ray example/rmiss.spv",
+    "ray miss shader source path" : "ray/ray example/rmiss.glsl"
+}

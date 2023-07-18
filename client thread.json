@@ -1,0 +1,21 @@
+{
+    "name" : "                                         ",
+    "description" : "This thread is loaded each time a player joins.",
+    "tasks" : [
+        {
+            "task"        : "Server Recieve"
+        },
+        {
+            "task"        : "Server Parse"
+        },
+        {
+            "task"        : "Server Process"
+        },
+        {
+            "task"        : "Server Serialize"
+        },
+        {
+            "task"        : "Server Send"
+        }
+    ]
+}

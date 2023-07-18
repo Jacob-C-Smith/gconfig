@@ -1,0 +1,19 @@
+{
+    "$schema"    : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/entity-schema.json",
+    "name"       : "entity 2",
+    "transform"  : {
+        "$schema"  : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/transform-schema.json",
+        "location" : [ 0, 0, 0 ],
+        "rotation" : [ 0, 0, 0 ],
+        "scale"    : [ 1, 1, 1 ]
+    },
+    "ai": {
+        "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/ai-schema.json",
+        "name": "AI",
+        "states": [
+            "running forward",
+            "attack"
+        ],
+        "initial state": "attack"
+    }
+}

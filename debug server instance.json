@@ -1,0 +1,62 @@
+{
+    "$schema"                    : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/instance-schema.json",
+    "name"                       : "G10 Server Debug Instance",
+    "input"                      : "G10/input.json",
+    "window width"               : 1280,
+    "window height"              : 720, 
+    "window title"               : "G10 Server Debug",
+    "fullscreen"                 : false,
+    "cache part count"           : 128,
+    "cache material count"       : 128,
+    "cache shader count"         : 32,
+    "initial scene"              : "G10/Demo Scene.json",
+    "network bandwidth"          : 64,
+    "loading thread count"       : 4,
+    "vulkan device extensions"   : [
+        "VK_KHR_swapchain",
+        "VK_KHR_display",
+        "VK_KHR_display_swapchain"
+    ],
+    "vulkan instance extensions" : [
+        "VK_KHR_display", 
+        "VK_KHR_surface", 
+        "VK_KHR_win32_surface", 
+        "VK_EXT_debug_report", 
+        "VK_EXT_debug_utils"
+    ],
+    "vulkan validation layers"   : [
+        "VK_LAYER_KHRONOS_validation",
+        "VK_LAYER_RENDERDOC_Capture"
+    ],
+    "max buffered frames"        : 2,
+    "vulkan physical device"     : "NVIDIA GeForce RTX 2060",
+    "audio device"               : "Headset Earphone (CORSAIR VOID PRO USB Gaming Headset)",
+    "server"                     : {
+        "name"        : "localhost",
+        "host"        : "127.0.0.1",
+        "port"        : 9999,
+        "max players" : 16,
+        "password"    : "password",
+        "bans"        : [
+            {
+                "host"       : "11.20.22.39",
+                "expiration" : 0,
+                "note"       : "Racial slurs"
+            },
+            {
+                "name"       : "Chris",
+                "expiration" : 1624000000,
+                "note"       : "Text chat spamming"
+            },
+            {
+                "host"      : "168.183.212.227",
+                "expiation" : 0,
+                "note"      : "Permabanned for being a bot"
+            }
+        ],
+        "tick rate"   : 50
+    },
+    "schedules"                  : [
+        "G10/schedules/server schedule.json"
+    ]
+}

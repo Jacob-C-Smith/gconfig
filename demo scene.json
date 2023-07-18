@@ -1,0 +1,20 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/scene-schema.json",
+    "name": "G10 Scene",
+    "entities": [
+        "G10/entity.json",
+        "G10/entity 2.json"
+    ],
+    "cameras": [
+        {
+            "$schema"  : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/camera-schema.json",
+            "name"     : "Camera",
+            "location" : [ 2, -4, 5 ],
+            "front"    : [ 1, 0, 0 ],
+            "up"       : [ 0, 0, 1 ],
+            "near"     :   0.01,
+            "far"      : 100.00,
+            "fov"      : 44.99
+        }
+    ]
+}

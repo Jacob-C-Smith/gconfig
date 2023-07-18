@@ -1,0 +1,10 @@
+{
+    "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/scene-schema.json",
+    "name"    : "G10 Scene",
+    "entities": [
+        "G10/entity.json",
+        "G10/entity 2.json",
+        "G10/entity 3.json",
+        "G10/entity 4.json"
+    ]
+}

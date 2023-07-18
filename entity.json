@@ -1,0 +1,37 @@
+{
+    "$schema"    : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/entity-schema.json",
+    "name"       : "entity",
+    "parts"      : [
+        "G10/part.json"
+    ],
+    "shader"     : "G10/shaders/G10 wireframe.json",
+    "transform"  : {
+        "$schema"  : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/transform-schema.json",
+        "location" : [ 3.0, 2.0, 1.0 ],
+        "rotation" : [ 0.0, 0.0, 0.0 ],
+        "scale"    : [ 1.0, 1.0, 1.0 ]
+    },
+    "ai": {
+        "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/ai-schema.json",
+        "name": "AI",
+        "states": [
+            "running forward",
+            "attack"
+        ],
+        "initial state": "running forward"
+    },
+    "collider": {
+        "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/collider-schema.json",
+        "max": [
+            1,
+            1,
+            1
+        ],
+        "min": [
+            -1,
+            -1,
+            -1
+        ],
+        "type": "box"
+    }
+}

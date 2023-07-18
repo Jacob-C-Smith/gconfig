@@ -1,0 +1,34 @@
+{
+    "name" : "Compute renderer",
+    "attachments" : [
+        {
+            "name"            : "final",
+            "description"     : "final rendering result",
+            "samples"         : 1,
+            "format"          : "unorm b8g8r8a8",
+            "load operation"  : "clear",
+            "store operation" : "store",
+            "initial layout"  : "present source",
+            "final layout"    : "present source"
+        }
+    ],
+    "passes" : [
+        {
+            "name" : "compute render pass",
+            "attachments" : [
+                "final"
+            ],
+            "subpasses" : [
+                {
+                    "name" : "compute subpass",
+                    "pipeline" : "compute",
+                    "shader" : "G10/shaders/compute example.json",
+                    "color attachments" : [
+                        "final"
+                    ]
+                }
+            ]
+        }
+    ],
+    "clear color" : [ 1.0, 1.0, 1.0, 1.0 ]
+}

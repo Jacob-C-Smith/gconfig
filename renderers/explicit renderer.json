@@ -1,0 +1,475 @@
+{
+    "name" : "Deferred lighting",
+    "attachments" :
+    [
+        {
+            "name" : "normal + specular",
+            "samples" : 1,
+            "description" : "normal and specular",
+            "format" : "unorm b8g8r8a8",
+            "load operation" : "don't care",
+            "store operation" : "don't care",
+            "initial layout" : "color attachment",
+            "final layout" : "color attachment" 
+        },
+        {
+            "name" : "depth",
+            "description" : "depth buffer",
+            "samples" : 1,
+            "format" : "unorm d16",
+            "load operation" : "clear",
+            "store operation" : "don't care",
+            "initial layout" : "depth stencil attachment",
+            "final layout" : "depth stencil attachment"
+        },
+        {
+            "name" : "diffuse",
+            "description" : "diffuse",
+            "samples" : 1,
+            "format" : "unorm b8g8r8a8",
+            "load operation" : "clear",
+            "store operation" : "don't care",
+            "initial layout" : "color attachment",
+            "final layout" : "color attachment"
+        },
+        {
+            "name" : "specular",
+            "description" : "specular",
+            "samples" : 1,
+            "format" : "unorm b8g8r8a8",
+            "load operation" : "clear",
+            "store operation" : "don't care",
+            "initial layout" : "color attachment",
+            "final layout" : "color attachment"
+        },
+        {
+            "name" : "final",
+            "description" : "final rendering result",
+            "samples" : 1,
+            "format" : "unorm b8g8r8a8",
+            "load operation" : "don't care",
+            "store operation" : "store",
+            "initial layout" : "color attachment",
+            "final layout" : "color attachment"
+        }
+    ],
+    "passes" :
+    [
+        {
+            "name" : "forward pass",
+            "subpasses" :
+            [
+                {
+                    "name" : "geometry and depth",
+                    "pipeline" : "graphics",
+                    "shader" :
+                    {
+                        "name" : "geometry and depth shader",
+                        "type" : "graphics",
+                        "vertex shader path" : "G10/shaders/graphics/geometry depth/vert.spv",
+                        "fragment shader path" : "G10/shaders/graphics/geometry depth/frag.spv",
+                        "in" :
+                        {
+                            "vertex attributes" :
+                            [
+                                {
+                                    "name" : "xyz",
+                                    "location" : 0,
+                                    "type" : "vec3"
+                                },
+                                {
+                                    "name" : "uv",
+                                    "location" : 1,
+                                    "type" : "vec2"
+                                },
+                                {
+                                    "name" : "nxyz",
+                                    "location" : 2,
+                                    "type" : "vec3"
+                                }
+                            ],
+                            "topology" : "triangle"
+                        },
+                        "rasterizer" :
+                        {
+                            "depth clamp enable" : false,
+                            "rasterizer discard enable" : false,
+                            "polygon mode" : "line",
+                            "cull mode" :
+                            [
+                                "front"
+                            ],
+                            "clockwise" : false,
+                            "depth bias enable" : false,
+                            "depth bias constant factor" : 0.0,
+                            "depth bias clamp" : 0.0,
+                            "depth bias slope factor" : 0.0,
+                            "line width" : 1.0
+                        },
+                        "layout" :
+                        {
+                            "sets" :
+                            [
+                                {
+                                    "name" : "camera",
+                                    "descriptors" :
+                                    [
+                                        {
+                                            "name" : "camera data",
+                                            "type" : "uniform buffer",
+                                            "struct" :
+                                            [
+                                                {
+                                                    "name" : "M",
+                                                    "type" : "mat4"
+                                                },
+                                                {
+                                                    "name" : "V",
+                                                    "type" : "mat4"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name" : "camera data 2",
+                                            "type" : "uniform buffer",
+                                            "struct" :
+                                            [
+                                                {
+                                                    "name" : "P",
+                                                    "type" : "mat4"
+                                                },
+                                                {
+                                                    "name" : "camera position",
+                                                    "type" : "vec3"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "push constant" :
+                            {
+                                
+                            }
+                        },    
+                        "attachments" :
+                        [
+                            {
+                                "name" : "color",
+                                "blend enable" : true,
+                                "source color blend factor" : "source alpha",
+                                "destination color blend factor" : "one minus source alpha",
+                                "color blend operation" : "add",
+                                "source alpha blend factor" : "one",
+                                "destination alpha blend factor" : "zero",
+                                "alpha blend operation" : "add"
+                            }
+                        ],
+                        "multisampler" :
+                        {
+                            "samples" : 1,
+                            "sample shading enable" : false,
+                            "minimum sample shading" : 0.0,
+                            "alpha to coverage enable" : false,
+                            "alpha to one enable" : false
+                        }
+                    },
+                    "color attachments" :
+                    [
+                        "normal + specular"
+                    ],
+                    "depth attachments" : "depth"
+                },
+                {
+                    "name" : "lighting",
+                    "pipeline" : "graphics",
+                    "shader path" : "G10/shaders/lighting.json",
+                    "shader" :
+                    {
+                        "name" : "lighting shader",
+                        "type" : "graphics",
+                        "vertex shader path" : "G10/shaders/graphics/lighting/vert.spv",
+                        "fragment shader path" : "G10/shaders/graphics/lighting/frag.spv",
+                        "in" :
+                        {
+                            "vertex attributes" :
+                            [
+                                {
+                                    "name" : "xyz",
+                                    "location" : 0,
+                                    "type" : "vec3"
+                                },
+                                {
+                                    "name" : "uv",
+                                    "location" : 1,
+                                    "type" : "vec2"
+                                },
+                                {
+                                    "name" : "nxyz",
+                                    "location" : 2,
+                                    "type" : "vec3"
+                                }
+                            ],
+                            "topology" : "triangle"
+                        },
+                        "rasterizer" :
+                        {
+                            "depth clamp enable" : false,
+                            "rasterizer discard enable" : false,
+                            "polygon mode" : "line",
+                            "cull mode" :
+                            [
+                                "front"
+                            ],
+                            "clockwise" : false,
+                            "depth bias enable" : false,
+                            "depth bias constant factor" : 0.0,
+                            "depth bias clamp" : 0.0,
+                            "depth bias slope factor" : 0.0,
+                            "line width" : 1.0
+                        },
+                        "layout" :
+                        {
+                            "sets" :
+                            [
+                                {
+                                    "name" : "camera",
+                                    "descriptors" :
+                                    [
+                                        {
+                                            "name" : "camera data",
+                                            "type" : "uniform buffer",
+                                            "struct" :
+                                            [
+                                                {
+                                                    "name" : "M",
+                                                    "type" : "mat4"
+                                                },
+                                                {
+                                                    "name" : "V",
+                                                    "type" : "mat4"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name" : "camera data 2",
+                                            "type" : "uniform buffer",
+                                            "struct" :
+                                            [
+                                                {
+                                                    "name" : "P",
+                                                    "type" : "mat4"
+                                                },
+                                                {
+                                                    "name" : "camera position",
+                                                    "type" : "vec3"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "push constant" :
+                            {
+                                
+                            }
+                        },    
+                        "attachments" :
+                        [
+                            {
+                                "name" : "color",
+                                "blend enable" : true,
+                                "source color blend factor" : "source alpha",
+                                "destination color blend factor" : "one minus source alpha",
+                                "color blend operation" : "add",
+                                "source alpha blend factor" : "one",
+                                "destination alpha blend factor" : "zero",
+                                "alpha blend operation" : "add"
+                            }
+                        ],
+                        "multisampler" :
+                        {
+                            "samples" : 1,
+                            "sample shading enable" : false,
+                            "minimum sample shading" : 0.0,
+                            "alpha to coverage enable" : false,
+                            "alpha to one enable" : false
+                        }
+                    },
+                    "input attachments" :
+                    [
+                        "normal + specular"
+                    ],
+                    "color attachments" :
+                    [
+                        "diffuse",
+                        "specular"
+                    ],
+                    "depth attachments" : "depth"
+                },
+                {
+                    "name" : "forward shading",
+                    "pipeline" : "graphics",
+                    "shader" :
+                    {
+                        "name" : "forward shading",
+                        "type" : "graphics",
+                        "vertex shader path" : "G10/shaders/graphics/lighting/vert.spv",
+                        "fragment shader path" : "G10/shaders/graphics/lighting/frag.spv",
+                        "in" :
+                        {
+                            "vertex attributes" :
+                            [
+                                {
+                                    "name" : "xyz",
+                                    "location" : 0,
+                                    "type" : "vec3"
+                                },
+                                {
+                                    "name" : "uv",
+                                    "location" : 1,
+                                    "type" : "vec2"
+                                },
+                                {
+                                    "name" : "nxyz",
+                                    "location" : 2,
+                                    "type" : "vec3"
+                                }
+                            ],
+                            "topology" : "triangle"
+                        },
+                        "rasterizer" :
+                        {
+                            "depth clamp enable" : false,
+                            "rasterizer discard enable" : false,
+                            "polygon mode" : "line",
+                            "cull mode" :
+                            [
+                                "front"
+                            ],
+                            "clockwise" : false,
+                            "depth bias enable" : false,
+                            "depth bias constant factor" : 0.0,
+                            "depth bias clamp" : 0.0,
+                            "depth bias slope factor" : 0.0,
+                            "line width" : 1.0
+                        },
+                        "layout" :
+                        {
+                            "sets" :
+                            [
+                                {
+                                    "name" : "camera",
+                                    "descriptors" :
+                                    [
+                                        {
+                                            "name" : "camera data",
+                                            "type" : "uniform buffer",
+                                            "struct" :
+                                            [
+                                                {
+                                                    "name" : "M",
+                                                    "type" : "mat4"
+                                                },
+                                                {
+                                                    "name" : "V",
+                                                    "type" : "mat4"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name" : "camera data 2",
+                                            "type" : "uniform buffer",
+                                            "struct" :
+                                            [
+                                                {
+                                                    "name" : "P",
+                                                    "type" : "mat4"
+                                                },
+                                                {
+                                                    "name" : "camera position",
+                                                    "type" : "vec3"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ],
+                            "push constant" :
+                            {
+                                
+                            }
+                        },    
+                        "attachments" :
+                        [
+                            {
+                                "name" : "color",
+                                "blend enable" : true,
+                                "source color blend factor" : "source alpha",
+                                "destination color blend factor" : "one minus source alpha",
+                                "color blend operation" : "add",
+                                "source alpha blend factor" : "one",
+                                "destination alpha blend factor" : "zero",
+                                "alpha blend operation" : "add"
+                            }
+                        ],
+                        "multisampler" :
+                        {
+                            "samples" : 1,
+                            "sample shading enable" : false,
+                            "minimum sample shading" : 0.0,
+                            "alpha to coverage enable" : false,
+                            "alpha to one enable" : false
+                        }
+                    },
+                    "input attachments" :
+                    [
+                        "diffuse",
+                        "specular"
+                    ],
+                    "color attachments" :
+                    [
+                        "final"
+                    ],
+                    "depth attachments" : "depth"
+                }
+            ],
+            "dependencies" :
+            [
+                {
+                    "flags" : "by region",
+                    "source subpass" : "geometry and depth",
+                    "destination subpass" : "lighting",
+                    "source stage" : "color attachment output",
+                    "destination stage" : "fragment shader",
+                    "source access" : "color attachment write",
+                    "destination access" : "shader read"
+                },
+                {
+                    "flags" : "by region",
+                    "source subpass" : "lighting",
+                    "destination subpass" : "forward shading",
+                    "source stage" : "color attachment output",
+                    "destination stage" : "fragment shader",
+                    "source access" : "color attachment write",
+                    "destination access" : "shader read"
+                }
+            ],
+            "framebuffer" :
+            {
+                "name" : "framebuffer",
+                "attachments" : [
+                    "final",
+                    "depth"
+                ]
+            }
+        }
+    ],
+    "clear color" :
+    [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+    ]
+}

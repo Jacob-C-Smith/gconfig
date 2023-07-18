@@ -1,0 +1,230 @@
+{
+    "$schema"              : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/shader-schema.json",
+    "name"                 : "Compute",
+    "type"                 : "compute",
+    "in"                   : [
+        {
+            "name"     : "geometry",
+            "location" : 0,
+            "type"     : "vec3"
+        },
+        {
+            "name"     : "normal",
+            "location" : 1,
+            "type"     : "vec3"
+        },
+        {
+            "name"     : "UV",
+            "location" : 2,
+            "type"     : "vec2"
+        },
+        {
+            "name"     : "Bone Groups",
+            "location" : 3,
+            "type"     : "vec4"
+        },
+        {
+            "name"     : "Bone Weights",
+            "location" : 4,
+            "type"     : "vec4"
+        }
+    ],
+    "sets"                 : [
+        {
+            "name" : "camera",
+            "descriptors" : [
+                {
+                    "name" : "camera",
+                    "type" : "uniform buffer",
+                    "struct" : [
+                        {
+                            "name" : "projection",
+                            "type" : "mat4"
+                        },
+                        {
+                            "name" : "model",
+                            "type" : "mat4"
+                        },
+                        {
+                            "name" : "view",
+                            "type" : "mat4"
+                        },
+                        {
+                            "name" : "camPos",
+                            "type" : "vec3"
+                        }
+                    ]
+                },
+                {
+                    "name" : "camera parameters",
+                    "type" : "uniform buffer",
+                    "struct" : [
+                        {
+                            "name" : "lightDir",
+                            "type" : "vec4"
+                        },
+                        {
+                            "name" : "exposure",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "gamma",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "prefilteredCubeMipLevels",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "scaleIBLAmbient",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "debugViewInputs",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "debugViewEquation",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "prefilteredCubeMipLevels",
+                            "type" : "vec3"
+                        },
+                        {
+                            "name" : "prefilteredCubeMipLevels",
+                            "type" : "vec3"
+                        }
+                    ]
+                },
+                {
+                    "name" : "samplerIrradiance",
+                    "type" : "samplerCube"
+                },
+                {
+                    "name" : "prefilteredMap",
+                    "type" : "samplerCube"
+                },
+                {
+                    "name" : "samplerBRDFLUT",
+                    "type" : "sampler2D"
+                }
+            ]
+        },
+        {
+            "name" : "material",
+            "descriptors" : [
+                {
+                    "name" : "albedo",
+                    "type" : "sampler2D"
+                },
+                {
+                    "name" : "rough",
+                    "type" : "sampler2D"
+                },
+                {
+                    "name" : "metal",
+                    "type" : "sampler2D"
+                },
+                {
+                    "name" : "normal",
+                    "type" : "sampler2D"
+                },
+                {
+                    "name" : "ao",
+                    "type" : "sampler2D"
+                },
+                {
+                    "name" : "emit",
+                    "type" : "sampler2D"
+                }
+            ]
+        },
+        {
+            "name" : "bones",
+            "descriptors" : [
+                {
+                    "name" : "bone data",
+                    "type" : "uniform buffer",
+                    "struct" : [
+                        {
+                            "name" : "matrix",
+                            "type" : "mat4"
+                        },
+                        {
+                            "name" : "joint_matrix",
+                            "type" : "mat4 list",
+                            "max"  :  128
+                        },
+                        {
+                            "name" : "joint_count",
+                            "type" : "float"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "push constant"        : {
+        "name"   : "material settings",
+        "struct" : [
+            {
+                "name" : "baseColorFactor",
+                "type" : "vec4"
+            },
+            {
+                "name" : "emissiveFactor",
+                "type" : "vec4"
+            },
+            {
+                "name" : "diffuseFactor",
+                "type" : "vec4"
+            },
+            {
+                "name" : "specularFactor",
+                "type" : "vec4"
+            },
+            {
+                "name" : "workflow",
+                "type" : "float"
+            },
+            {
+                "name" : "baseColorTextureSet",
+                "type" : "int"
+            },
+            {
+                "name" : "physicalDescriptorTextureSet",
+                "type" : "int"
+            },
+            {
+                "name" : "normalTextureSet",
+                "type" : "int"
+            },
+            {
+                "name" : "occlusionTextureSet",
+                "type" : "int"
+            },
+            {
+                "name" : "emissiveTextureSet",
+                "type" : "int"
+            },
+            {
+                "name" : "metallicFactor",
+                "type" : "float"
+            },
+            {
+                "name" : "roughnessFactor",
+                "type" : "float"
+            },
+            {
+                "name" : "alphaMask",
+                "type" : "float"
+            },
+            {
+                "name" : "alphaMaskCutoff",
+                "type" : "float"
+            }
+        ]
+    },
+    "compute shader path" : "G10/shaders/compute/comp.spv"
+}

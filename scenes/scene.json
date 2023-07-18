@@ -1,0 +1,47 @@
+{
+    "$schema" : "https://schema.g10.app/scene.json",
+    "name" : "scene",
+    "entities" :
+    [
+        {
+            "$schema" : "https://schema.g10.app/entity.json",
+            "name" : "entity 1",
+            "parts" :
+            [
+                {
+                    "$schema": "https://schema.g10.app/part.json",
+                    "name": "part",
+                    "path": "G10/scenes/part.ply"
+                }
+            ],
+            "shader" : "wireframe",
+            "transform" :
+            {
+                "$schema" : "https://schema.g10.app/transform.json",
+                "location" : [ 0, 0, 0 ],
+                "rotation" : [ 0, 0, 0 ],
+                "scale"    : [ 1, 1, 1 ]
+            },
+            "rigid body" :
+            {
+                "$schema" : "https://schema.g10.app/rigid-body.json",
+                "active" : true,
+                "mass" : 10,
+                "bounce" : 0.0,
+                "friction" : 0.5
+            }
+        }
+    ],
+    "cameras": [
+        {
+            "$schema" : "https://schema.g10.app/camera.json",
+            "name" : "camera",
+            "front" : [ 1, 1, 1 ],
+            "up" : [ 0, 0, 1 ],
+            "location" : [ 5, 5, 1 ],
+            "far": 100.0,
+            "near": 0.01,
+            "fov": 89.99
+        }
+    ]
+}

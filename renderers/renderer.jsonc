@@ -1,0 +1,140 @@
+/* A G10 renderer */
+{
+    /* The name of the renderer */
+    "name" : "Minimum renderer",
+    /*
+       This is an array of attachments. The properties
+       of the attachment objects are used to construct
+       VkImages for attachments and VkAttachmentDescriptions.  
+    */
+    "attachments" : [
+        {
+            "name"            : "final",                   // The name of the attachment
+            "description"     : "final rendering result",  // A breif description
+            "samples"         : 1,                         // The number of samples of the image
+            "format"          : "unorm b8g8r8a8",          // The format of the image view that will be used for the attachment
+            "load operation"  : "clear",                   // What happens to the attachment at the end of the subpass
+            "store operation" : "store",                   // What happens to the attachment at the end of the subpass
+            "initial layout"  : "undefined",               // The layout of the attachment when the render pass begins
+            "final layout"    : "present source"           // The layout of the attachment when the render pass ends
+        },
+        {
+            "name"            : "depth",                    // The name of the attachment
+            "description"     : "depth buffer",             // A breif description
+            "samples"         : 1,                          // The number of samples of the image
+            "format"          : "unorm d24 uint s8",        // The format of the image view that will be used for the attachment
+            "load operation"  : "clear",                    // What happens to the attachment at the end of the subpass
+            "store operation" : "store",                    // What happens to the attachment at the end of the subpass
+            "initial layout"  : "depth stencil attachment", // The layout of the attachment when the render pass begins
+            "final layout"    : "depth stencil attachment"  // The layout of the attachment when the render pass ends
+        }
+    ],
+    /*
+       This is an ordered array of render passes, to be rendered once per frame
+    */
+    "passes" : [
+        {
+            /*
+               The name of the render pass
+            */
+            "name" : "forward pass",
+            /*
+               An ordered array of attachment names. 
+            */
+            "attachments" : [
+                "final",
+                "depth"
+            ],
+            /*
+                An ordered array of subpasses
+            */
+            "subpasses" : [
+                /*
+                   A G10 subpass object
+                */
+                {
+                    /*
+                       The name of the subpass
+                    */
+                    "name" : "geometry and depth",
+                    /*
+                       An array of shaders. If an object uses this shader, it 
+                       will be added to the draw queue for that shader. 
+                    */
+                    "shaders" :
+                    [
+                        "G10/shaders/graphics/wireframe.json",
+                        "G10/shaders/graphics/wireframe2.json"
+                    ],
+                    /*
+                        An unordered array of color attachments to be used in this subpass
+                    */
+                    "color attachments" : [ "final" ],
+                    /*
+                       The depth attachment to use in this subpass
+                    */
+                    "depth attachment" : "depth"
+                }
+            ],
+            /*
+               An array of dependency objects describes the dependencies between subpasses
+            */
+            "dependencies" : [
+
+                /*
+                   A dependency object
+                */
+                {
+
+                    "flags" : "by region",
+                    /*
+                       The subpass of the first subpass in the dependency, or null for external
+                    */
+                    "source subpass" : null,
+                    /*
+                       The subpass of the second subpass in the dependency, or null for external
+                    */
+                    "destination subpass" : "forward pass",
+                    /*
+                       Specifies the source stage mask
+                    */
+                    "source stage" : [
+                        "color attachment output",
+                        "early fragment tests"
+                    ],
+                    /*
+                       Specifies the destination stage mask
+                    */
+                    "destination stage" : 
+                    [
+                        "color attachment output",
+                        "early fragment tests"
+                    ],
+                    "destination access" :
+                    [
+                        "color attachment write",
+                        "depth stencil attachment write"
+                    ]
+                }
+            ],
+            /*
+              This is an array of clear colors, such that the array at each index is 
+              the clear color of the attachment at that index
+            */
+            "clear color" :
+            [
+                [ 1.0, 1.0, 1.0, 1.0 ],
+                [ 1.0, 1.0, 1.0, 1.0 ]
+            ]
+        }
+    ],
+    /*
+      This is an array of clear colors, such that the array at each index is 
+      the clear color of the attachment at that index
+    */
+    "clear color" :
+    [
+        [ 1.0, 1.0, 1.0, 1.0 ],
+        [ 1.0, 1.0, 1.0, 1.0 ]
+    ]
+}

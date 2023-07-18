@@ -1,0 +1,23 @@
+{
+    "name"  : "G10 controller input configuration",
+    "binds" : [
+        {
+            "name" : "JUMP",
+            "keys" : [
+                "GAMEPAD A"
+            ]
+        },
+        {
+            "name" : "DUCK",
+            "keys" : [
+                "GAMEPAD B"
+            ]
+        },
+        {
+            "name" : "RELOAD",
+            "keys" : [
+                "GAMEPAD X"
+            ]
+        }
+    ] 
+}

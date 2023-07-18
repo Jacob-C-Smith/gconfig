@@ -1,0 +1,131 @@
+{
+    "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/scene-schema.json",
+    "name" : "scene",
+    "entities" :
+    [
+        {
+            "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/entity-schema.json",
+            "name" : "entity 1",
+            "parts" :
+            [
+                {
+                    "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/part-schema.json",
+                    "name": "part",
+                    "path": "G10/scenes/part.ply"
+                }
+            ],
+            "shader" : "wireframe",
+            "transform" :
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/transform-schema.json",
+                "location" : [ 0, 0, 0 ],
+                "rotation" : [ 0, 0, 0 ],
+                "scale"    : [ 1, 1, 1 ]
+            },
+            "rigid body" :
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/rigid-body-schema.json",
+                "active" : true,
+                "mass" : 10,
+                "bounce" : 0.0,
+                "friction" : 0.5
+            }
+        },
+        {
+            "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/entity-schema.json",
+            "name" : "entity 2",
+            "parts" :
+            [
+                {
+                    "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/part-schema.json",
+                    "name": "part",
+                    "path": "G10/scenes/part.ply"
+                }
+            ],
+            "shader" : "wireframe",
+            "transform" :
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/transform-schema.json",
+                "location" : [ 0, 0, 0 ],
+                "rotation" : [ 0, 0, 0 ],
+                "scale"    : [ 1, 1, 1 ]
+            },
+            "rigid body" :
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/rigid-body-schema.json",
+                "active" : true,
+                "mass" : 10,
+                "bounce" : 0.0,
+                "friction" : 0.5
+            }
+        },
+        {
+            "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/entity-schema.json",
+            "name" : "entity 3",
+            "parts" :
+            [
+                {
+                    "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/part-schema.json",
+                    "name": "part",
+                    "path": "G10/scenes/part.ply"
+                }
+            ],
+            "shader" : "wireframe2",
+            "transform" :
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/transform-schema.json",
+                "location" : [ 0, 0, 0 ],
+                "rotation" : [ 0, 0, 0 ],
+                "scale"    : [ 1, 1, 1 ]
+            },
+            "rigid body" :
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/rigid-body-schema.json",
+                "active" : true,
+                "mass" : 10,
+                "bounce" : 0.0,
+                "friction" : 0.5
+            }
+        },
+        {
+            "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/entity-schema.json",
+            "name" : "entity 4",
+            "parts" :
+            [
+                {
+                    "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/part-schema.json",
+                    "name": "part",
+                    "path": "G10/scenes/part.ply"
+                }
+            ],
+            "shader" : "wireframe2",
+            "transform" :
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/transform-schema.json",
+                "location" : [ 0, 0, 0 ],
+                "rotation" : [ 0, 0, 0 ],
+                "scale"    : [ 1, 1, 1 ]
+            },
+            "rigid body" :
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/rigid-body-schema.json",
+                "active" : true,
+                "mass" : 10,
+                "bounce" : 0.0,
+                "friction" : 0.5
+            }
+        }
+    ],
+    "cameras": [
+        {
+            "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/camera-schema.json",
+            "name" : "camera",
+            "front" : [ 1, 1, 1 ],
+            "up" : [ 0, 0, 1 ],
+            "location" : [ 5, 5, 1 ],
+            "far": 100.0,
+            "near": 0.01,
+            "fov": 89.99
+        }
+    ]
+}

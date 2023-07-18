@@ -1,0 +1,117 @@
+{
+    "$schema"    : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/texture-schema.json",
+    "name"       : "Texture",
+    "sampler"    : {
+        "magnification" : [
+            "nearest",
+            "linear"
+        ],
+        "minification" : [
+            "nearest",
+            "linear"
+        ],
+        "mip map" : [
+            "nearest",
+            "linear"
+        ],
+        "U addressing"    : [
+            "repeat",
+            "mirrored repeat",
+            "clamp to edge",
+            "border"
+        ],
+        "V addressing"    : [
+            "repeat",
+            "mirrored repeat",
+            "clamp to edge",
+            "border"
+        ],
+        "W addressing"    : [
+            "repeat",
+            "mirrored repeat",
+            "clamp to edge",
+            "border"
+        ],
+        "mip LOD bias" : 0.0,
+        "anisotropy" : false,
+        "compare"    : false,
+        "compare operation" : [
+            "never",
+            "less",
+            "equal",
+            "less or equal",
+            "greater",
+            "not equal",
+            "greater or equal",
+            "always"
+        ],
+        "minimum LOD" : 0.0,
+        "maximum LOD" : 1.0,
+        "border color" : [
+            "transparent black float",
+            "transparent black int",
+            "opaque black float",
+            "opaque black int",
+            "opaque white float",
+            "opaque white int"
+        ],
+        "unnormalized coordinates" : false
+    },
+    "image view" : {
+        "view type" : [
+            "1D",
+            "2D",
+            "3D",
+            "cubemap",
+            "1D array",
+            "2D array",
+            "cube array"
+        ],
+        "format" : "u8vec4",
+        "swizzle" : [
+            "identity",
+            "zero",
+            "one",
+            "r",
+            "g",
+            "b",
+            "a"
+        ],
+        "image aspects" : [
+            "color",
+            "depth",
+            "stencil",
+            "metadata"
+        ],
+        "generate mips" : false
+    },
+    "image" : {
+        "flags" : [
+            "binding",
+            "residency",
+            "aliased",
+            "format",
+            "compatible"
+        ],
+        "dimension count" : 2,
+        "format" : "u8vec4",
+        "extent" : [
+            1024,
+            1024
+        ],
+        "mip levels" : 9,
+        "array layers" : 1,
+        "samples" : 1,
+        "usage" : [
+            "transfer source",
+            "transfer destination",
+            "sampled", 
+            "storage",
+            "color attachment",
+            "depth attachment",
+            "transient attachment",
+            "input attachment"
+        ],
+        "atomic sharing" : false
+    }
+}

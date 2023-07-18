@@ -1,0 +1,451 @@
+{
+    "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/instance-schema.json",
+    "name" : "G10 Explicit Client Debug Instance",
+    "renderer" : {
+        "name" : "Deferred lighting",
+        "attachments" : [
+            {
+                "name"            : "normal + specular",
+                "samples"         : 1,
+                "description"     : "normal and specular",
+                "format"          : "unorm b8g8r8a8",
+                "load operation"  : "don't care",
+                "store operation" : "don't care",
+                "initial layout"  : "color attachment",
+                "final layout"    : "color attachment" 
+            },
+            {
+                "name"            : "depth",
+                "description"     : "depth buffer",
+                "samples"         : 1,
+                "format"          : "unorm d16",
+                "load operation"  : "clear",
+                "store operation" : "don't care",
+                "initial layout"  : "depth stencil attachment",
+                "final layout"    : "depth stencil attachment"
+            },
+            {
+                "name"            : "diffuse",
+                "description"     : "diffuse",
+                "samples"         : 1,
+                "format"          : "unorm b8g8r8a8",
+                "load operation"  : "clear",
+                "store operation" : "don't care",
+                "initial layout"  : "color attachment",
+                "final layout"    : "color attachment"
+            },
+            {
+                "name"            : "specular",
+                "description"     : "specular",
+                "samples"         : 1,
+                "format"          : "unorm b8g8r8a8",
+                "load operation"  : "clear",
+                "store operation" : "don't care",
+                "initial layout"  : "color attachment",
+                "final layout"    : "color attachment"
+            },
+            {
+                "name"            : "final",
+                "description"     : "final rendering result",
+                "samples"         : 1,
+                "format"          : "unorm b8g8r8a8",
+                "load operation"  : "don't care",
+                "store operation" : "store",
+                "initial layout"  : "color attachment",
+                "final layout"    : "color attachment"
+            }
+        ],
+        "passes" : [
+            {
+                "name" : "forward pass",
+                "subpasses" : [
+                    {
+                        "name" : "geometry and depth",
+                        "pipeline" : "graphics",
+                        "shader path" : "G10/shaders/geometry depth.json",
+                        "color attachments" : [
+                            "normal + specular"
+                        ],
+                        "depth attachments" : "depth"
+                    },
+                    {
+                        "name" : "lighting",
+                        "pipeline" : "graphics",
+                        "shader path" : "G10/shaders/lighting.json",
+                        "input attachments" : [
+                            "normal + specular"
+                        ],
+                        "color attachments" : [
+                            "diffuse",
+                            "specular"
+                        ],
+                        "depth attachments" : "depth"
+                    },
+                    {
+                        "name" : "forward shading",
+                        "pipeline" : "graphics",
+                        "shader path" : "G10/shaders/forward shading.json",
+                        "input attachments" : [
+                            "diffuse",
+                            "specular"
+                        ],
+                        "color attachments" : [
+                            "final"
+                        ],
+                        "depth attachments" : "depth"
+                    }
+                ],
+                "dependencies" : [
+                    {
+                        "flags"               : "by region",
+                        "source subpass"      : "geometry and depth",
+                        "destination subpass" : "lighting",
+                        "source stage"        : "color attachment output",
+                        "destination stage"   : "fragment shader",
+                        "source access"       : "color attachment write",
+                        "destination access"  : "shader read"
+                    },
+                    {
+                        "flags"               : "by region",
+                        "source subpass"      : "lighting",
+                        "destination subpass" : "forward shading",
+                        "source stage"        : "color attachment output",
+                        "destination stage"   : "fragment shader",
+                        "source access"       : "color attachment write",
+                        "destination access"  : "shader read"
+                    }
+                ]
+            }
+        ],
+        "clear color" : [ 1.0, 1.0, 1.0, 1.0 ]
+    },
+    "input" : {
+        "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/input-schema.json",
+        "name"  : "G10 default input configuration",
+        "binds" : [
+            {
+                "name" : "FORWARD",
+                "keys" : [
+                    "W"
+                ]
+            },
+            {
+                "name" : "BACKWARD",
+                "keys" : [
+                    "S"
+                ]
+            },
+            {
+                "name" : "STRAFE LEFT",
+                "keys" : [
+                    "A"
+                ]
+            },
+            {
+                "name" : "STRAFE RIGHT",
+                "keys" : [
+                    "D"
+                ]
+            },
+            {
+                "name" : "JUMP",
+                "keys" : [
+                    "SPACE"
+                ]
+            },
+            {
+                "name" : "DUCK",
+                "keys" : [
+                    "C"
+                ]
+            },
+            {
+                "name" : "PRONE",
+                "keys" : [
+                    "LEFT CONTROL"
+                ]
+            },
+            {
+                "name" : "VOICE TRANSMIT",
+                "keys" : [
+                    "F"
+                ]
+            },
+            {
+                "name" : "TEXT CHAT",
+                "keys" : [
+                    "Y"
+                ]
+            },
+            {
+                "name" : "A ATTACK",
+                "keys" : [
+                    "MOUSE 1"
+                ]
+            },
+            {
+                "name" : "B ATTACK",
+                "keys" : [
+                    "MOUSE 2"
+                ]
+            },
+            {
+                "name" : "UP",
+                "keys" : [
+                    "MOUSE UP"
+                ]
+            },
+            {
+                "name" : "DOWN",
+                "keys" : [
+                    "MOUSE DOWN"
+                ]
+            },
+            {
+                "name" : "LEFT",
+                "keys" : [
+                    "MOUSE LEFT"
+                ]
+            },
+            {
+                "name" : "RIGHT",
+                "keys" : [
+                    "MOUSE RIGHT"
+                ]
+            },
+            {
+                "name" : "RELOAD",
+                "keys" : [
+                    "R"
+                ]
+            },
+            {
+                "name" : "QUIT",
+                "keys" : [
+                    "ESCAPE"
+                ]
+            },
+            {
+                "name" : "CAMERA UP",
+                "keys" : [
+                    "KEYPAD 8"
+                ]
+            },
+            {
+                "name" : "CAMERA DOWN",
+                "keys" : [
+                    "KEYPAD 2"
+                ]
+            },
+            {
+                "name" : "TOGGLE LOCK MOUSE",
+                "keys" : [
+                    "TAB"
+                ]
+            },
+            {
+                "name" : "TOGGLE FULLSCREEN",
+                "keys" : [
+                    "F11"
+                ]
+            }
+        ],
+        "mouse sensitivity" : 0.5
+    },
+    "schedules" : [
+        {
+            "name" : "Client Schedule",
+            "threads" : [
+                {
+                    "name" : "Render Thread",
+                    "description" : "Draws frame N-1",
+                    "tasks" : [
+                        {
+                            "task" : "Render"
+                        }
+                    ]
+                },
+                {
+                    "name" : "Main Thread",
+                    "description" : "Game loop",
+                    "tasks" : [
+                        {
+                            "task" : "Input"
+                        },
+                        {
+                            "task" : "UI"
+                        },
+                        {
+                            "task" : "AI",
+                            "wait thread" : "Worker 2",
+                            "wait task"  : "Pre AI"
+                        },
+                        {
+                            "task" : "User Code"
+                        },
+                        {
+                            "task" : "Resolve Collisions",
+                            "wait thread" : "Render Thread",
+                            "wait task"  : "Render"
+                        },
+                        {
+                            "task" : "Update Forces"
+                        },
+                        {
+                            "task" : "Move Objects"
+                        },
+                        {
+                            "task" : "Copy State"
+                        }
+                    ]
+                },
+                {
+                    "name" : "Worker 1",
+                    "description" : "Audio and physics",
+                    "tasks" : [
+                        {
+                            "task" : "Audio"
+                        },
+                        {
+                            "task" : "Resolve Collisions"
+                        },
+                        {
+                            "task" : "Update Forces"
+                        },
+                        {
+                            "task" : "Move Objects"
+                        }
+                    ]
+                },
+                {
+                    "name" : "Worker 2",
+                    "description" : "Pre AI and physics",
+                    "tasks" : [
+                        {
+                            "task" : "Pre AI"
+                        },
+                        {
+                            "task" : "Resolve Collisions",
+                            "wait thread" : "Main Thread",
+                            "wait task"   : "User Code"
+                        },
+                        {
+                            "task" : "Update Forces"
+                        },
+                        {
+                            "task" : "Move Objects"
+                        }
+                    ]
+                },
+                {
+                    "name" : "Worker 3",
+                    "description" : "Server input and physics",
+                    "tasks" : [
+                        {
+                            "task" : "Resolve Collisions",
+                            "wait thread" : "Main Thread",
+                            "wait task" : "User Code"
+                        },
+                        {
+                            "task" : "Animation"
+                        },
+                        {
+                            "task" : "Move Objects"
+                        }
+                    ]
+                },
+                {
+                    "name" : "Worker 4",
+                    "description" : "Server output and physics",
+                    "tasks" : [
+                        {
+                            "task" : "Resolve Collisions",
+                            "wait thread" : "Main Thread",
+                            "wait task" : "User Code"
+                        },
+                        {
+                            "task" : "Animation"
+                        },
+                        {
+                            "task" : "Move Objects"
+                        }
+                    ]
+                }
+            ],
+            "main thread" : "Main Thread",
+            "repeat" : true
+        }
+    ],
+    "initial scene" : {
+        "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/scene-schema.json",
+        "name" : "Scene",
+        "entities" : [
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/entity-schema.json",
+                "name" : "Cube",
+                "parts" : [
+                    "G10/parts/Cube.json"
+                ],
+                "shader" : "Textured",
+                "transform" : {
+                    "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/transform-schema.json",
+                    "location" : [ -40.0, 52.0, 8.0 ],
+                    "quaternion" : [ 1.0, 0.0, 0.0, 0.0 ],
+                    "scale" : [ 1.0, 1.0, 1.0 ]
+                }
+            }
+        ],
+        "cameras" : [
+            {
+                "$schema" : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/camera-schema.json",
+                "name" : "Camera",
+                "fov" : 45.0,
+                "near" : 0.1,
+                "far" : 1000.0,
+                "front" : [ 1.001, 0.000, 0.000 ],
+                "up" : [ 0.0, 0.0, 1.0 ],
+                "location" : [ 3.0, 4.0, 3.0 ]
+            }
+        ],
+        "skybox" : "G10/skyboxes/world.json"
+    },
+    "window" : { 
+        "width" : 1280,
+        "height" : 720, 
+        "title" : "G10 Vulkan Debug",
+        "fullscreen" : false
+    },
+    "cache" : { 
+        "part count" : 128,
+        "material count" : 128,
+        "shader count" : 32,
+        "ai count" : 16
+    },
+    "splash screen" : {
+        "front" : "G10/splash.png",
+        "back"  : "G10/splash_back.png"
+    },
+    "network bandwidth" : 64,
+    "loading thread count" : 4,
+    "audio device" : "Headset Earphone (CORSAIR VOID PRO USB Gaming Headset)",
+    "vulkan" : {
+        "device extensions" : [
+            "VK_KHR_swapchain",
+            "VK_KHR_display",
+            "VK_KHR_display_swapchain",
+            "VK_EXT_mesh_shader"
+        ],
+        "instance extensions" : [
+            "VK_KHR_display", 
+            "VK_KHR_surface", 
+            "VK_KHR_win32_surface", 
+            "VK_EXT_debug_report", 
+            "VK_EXT_debug_utils",
+            "VK_EXT_descriptor_buffer"
+        ],
+        "validation layers" : [
+            "VK_LAYER_KHRONOS_validation"
+        ],
+        "max buffered frames" : 2
+    }
+}

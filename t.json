@@ -1,0 +1,47 @@
+{
+    "$schema"    : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/texture-schema.json",
+    "name"       : "Texture",
+    "path"       : "G10 Scheduler.png",
+    "sampler"    : {
+        "magnification" : "nearest",
+        "minification"  : "nearest",
+        "mip map"       : "nearest",
+        "U addressing"  : "repeat",
+        "V addressing"  : "repeat",
+        "mip LOD bias"  : 0.0,
+        "anisotropy"    : false,
+        "compare"       : false,
+        "minimum LOD"   : 1
+    },
+    "image view" : {
+        "view type" : "2D",
+        "format" : "u8vec4 sRGB",
+        "swizzle" : [
+            "r",
+            "g",
+            "b",
+            "a"
+        ],
+        "image aspects" : [
+            "color"
+        ],
+        "generate mips" : false
+    },
+    "image" : {
+        "format" : "u8vec4",
+        "samples" :  1,
+        "tiling" : "optimal",
+        "usage" : [
+            "transfer source",
+            "transfer destination",
+            "sampled"
+        ],
+        "extent" : [
+            1024,
+            1024
+        ],
+        "mip levels" : 9,
+        "array layers" : 1,
+        "atomic sharing" : false
+    }
+}

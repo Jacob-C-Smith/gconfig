@@ -1,0 +1,9 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/ai-schema.json",
+    "name": "AI",
+    "states": [
+        "running forward",
+        "attack"
+    ],
+    "initial state": "running forward"
+}

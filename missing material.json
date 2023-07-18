@@ -1,0 +1,11 @@
+{
+    "name"     : "missing material",
+    "textures" : {
+        "albedo" : "G10/textures/missing albedo.png",
+        "normal" : "G10/textures/missing normal.png",
+        "metal"  : "G10/textures/missing metal.png",
+        "rough"  : "G10/textures/missing rough.png",
+        "ao"     : "G10/textures/missing ao.png",
+        "height" : "G10/textures/missing height.png"
+    }
+}

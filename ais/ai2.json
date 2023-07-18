@@ -1,0 +1,13 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/ai-schema.json",
+    "name": "AI 2",
+    "states": [
+        "idle",
+        "alert",
+        "sleeping",
+        "suicide bombing",
+        "attack",
+        "hiding"
+    ],
+    "initial state": "idle"
+}

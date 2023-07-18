@@ -1,0 +1,23 @@
+{
+    "$schema" : "https://schema.g10.app/shader.json",
+    "name" : "compute shader",
+    "type" : "compute",
+    "compute shader path" : "G10/shaders/compute/compute example/comp.spv",
+    "compute shader source path" : "compute/compute example/comp.glsl",
+    "layout" : {
+        "sets" : [
+            {
+                "name" : "output",
+                "descriptors" : [
+                    {
+                        "name"   : "output image",
+                        "stages" : [
+                            "compute"
+                        ],
+                        "type" : "storage image"
+                    }
+                ]
+            }
+        ]
+    }
+}

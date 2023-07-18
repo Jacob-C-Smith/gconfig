@@ -1,0 +1,13 @@
+{
+    "name"         : "Scheduler",
+    "threads"      : [
+        {
+            "name"        : "Game loop",
+            "description" : "Single threaded solution",
+            "tasks"       : [
+                "Input",
+                "Render"
+            ]
+        }
+    ]
+}

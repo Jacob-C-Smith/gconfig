@@ -1,0 +1,43 @@
+{
+    "name"         : "Server Schedule",
+    "threads"      : [
+        {
+            "name" : "Main Thread",
+            "description" : "",
+            "tasks" : [
+                {
+                    "task" : "Input"
+                },
+                {
+                    "task" : "User Code"
+                },
+                {
+                    "task" : "Copy State"
+                }
+            ]
+        },
+        {
+            "name" : "Wait thread",
+            "description" : "Thread waits for client to connect, and spawns a new thread",
+            "tasks" : [
+                {
+                    "task"        : "Server Wait"
+                }
+            ]
+        },
+        {
+            "name" : "Worker 1",
+            "description" : "Physics",
+            "tasks" : [
+                {
+                    "task"        : "Update Forces"
+                },
+                {
+                    "task"        : "Move Objects"
+                }
+            ]
+        }
+    ],
+    "main thread"  : "Main Thread",
+    "repeat"       : true
+}

@@ -1,0 +1,103 @@
+{
+    "$schema" : "https://schema.g10.app/shader.json",
+    "name" : "graphics example",
+    "type" : "graphics",
+    "vertex shader path" : "G10/shaders/graphics/graphics example/vert.spv",
+    "vertex shader source path" : "graphics/graphics example/vert.glsl",
+    "fragment shader path" : "G10/shaders/graphics/graphics example/frag.spv",
+    "fragment shader source path" : "graphics/graphics example/frag.glsl",
+    "in" : {
+        "vertex attributes" : [
+            {
+                "name"     : "xyz",
+                "type"     : "vec3"
+            },
+            {
+                "name"     : "uv",
+                "type"     : "vec2"
+            },
+            {
+                "name"     : "nxyz",
+                "type"     : "vec3"
+            }
+        ],
+        "topology" : "triangle"
+    },
+    "rasterizer" : {
+        "depth clamp enable"         : false,
+        "rasterizer discard enable"  : false,
+        "polygon mode"               : "line",
+        "cull mode"                  : [
+            "front"
+        ],
+        "clockwise"                  : false,
+        "depth bias enable"          : false,
+        "depth bias constant factor" : 0.0,
+        "depth bias clamp"           : 0.0,
+        "depth bias slope factor"    : 0.0,
+        "line width"                 : 1.0
+    },
+    "layout" : {
+        "sets" : [
+            {
+                "name" : "camera",
+                "descriptors" : [
+                    {
+                        "name"   : "camera data",
+                        "stages" : [
+                            "vertex",
+                            "fragment"
+                        ],
+                        "type"   : "uniform buffer",
+                        "struct" : [
+                            { "M" : "mat4" },
+                            { "V" : "mat4" }
+                        ]
+                    },
+                    {
+                        "name"   : "camera data 2",
+                        "type"   : "uniform buffer",
+                        "struct" : [
+                            {
+                                "name" : "P",
+                                "type" : "mat4"
+                            },
+                            {
+                                "name" : "camera position",
+                                "type" : "vec3"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "push constant" : {
+            "name"   : "push constant",
+            "struct" : [
+                {
+                    "name" : "model matrix",
+                    "type" : "mat4"
+                }
+            ]
+        }
+    },    
+    "attachments" : [
+        {
+            "name"                           : "color",
+            "blend enable"                   : true,
+            "source color blend factor"      : "source alpha",
+            "destination color blend factor" : "one minus source alpha",
+            "color blend operation"          : "add",
+            "source alpha blend factor"      : "one",
+            "destination alpha blend factor" : "zero",
+            "alpha blend operation"          : "add"
+        }
+    ],
+    "multisampler" : {
+        "samples"                  : 1,
+        "sample shading enable"    : false,
+        "minimum sample shading"   : 0.0,
+        "alpha to coverage enable" : false,
+        "alpha to one enable"      : false
+    }
+}

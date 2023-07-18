@@ -1,0 +1,29 @@
+{
+    "$schema"    : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/texture-schema.json",
+    "name"       : "Texture",
+    "sampler"    : {
+        "magnification" : "nearest",
+        "minification"  : "nearest",
+        "mip map"       : "nearest",
+        "U addressing"  : "repeat",
+        "V addressing"  : "repeat",
+        "mip LOD bias"  : 0.0,
+        "anisotropy"    : false,
+        "compare"       : false,
+        "minimum LOD"   : 1
+    },
+    "image view" : {
+        "view type" : "2D",
+        "image aspects" : "color"
+    },
+    "image" : {
+        "format" : "R8G8B8",
+        "samples" :  1,
+        "tiling" : "optimal",
+        "usage" : [
+            "transfer source",
+            "transfer destination",
+            "sampled"
+        ]
+    }
+}

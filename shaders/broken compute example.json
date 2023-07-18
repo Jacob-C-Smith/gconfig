@@ -1,0 +1,7 @@
+{
+    "$schema" : "https://schema.g10.app/shader.json",
+    "name" : "compute shader",
+    "type" : "compute",
+    "compute shader path" : "G10/shaders/compute/broken compute example/comp.spv",
+    "compute shader source path" : "compute/broken compute example/comp.glsl"
+}

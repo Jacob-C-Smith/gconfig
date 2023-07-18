@@ -1,0 +1,118 @@
+{
+    "name" : "Deferred lighting",
+    "attachments" : [
+        {
+            "name"            : "normal + specular",
+            "samples"         : 1,
+            "description"     : "normal and specular",
+            "format"          : "unorm b8g8r8a8",
+            "load operation"  : "don't care",
+            "store operation" : "don't care",
+            "initial layout"  : "color attachment",
+            "final layout"    : "color attachment" 
+        },
+        {
+            "name"            : "depth",
+            "description"     : "depth buffer",
+            "samples"         : 1,
+            "format"          : "unorm d16",
+            "load operation"  : "clear",
+            "store operation" : "don't care",
+            "initial layout"  : "depth stencil attachment",
+            "final layout"    : "depth stencil attachment"
+        },
+        {
+            "name"            : "diffuse",
+            "description"     : "diffuse",
+            "samples"         : 1,
+            "format"          : "unorm b8g8r8a8",
+            "load operation"  : "clear",
+            "store operation" : "don't care",
+            "initial layout"  : "color attachment",
+            "final layout"    : "color attachment"
+        },
+        {
+            "name"            : "specular",
+            "description"     : "specular",
+            "samples"         : 1,
+            "format"          : "unorm b8g8r8a8",
+            "load operation"  : "clear",
+            "store operation" : "don't care",
+            "initial layout"  : "color attachment",
+            "final layout"    : "color attachment"
+        },
+        {
+            "name"            : "final",
+            "description"     : "final rendering result",
+            "samples"         : 1,
+            "format"          : "unorm b8g8r8a8",
+            "load operation"  : "don't care",
+            "store operation" : "store",
+            "initial layout"  : "color attachment",
+            "final layout"    : "color attachment"
+        }
+    ],
+    "passes" : [
+        {
+            "name" : "forward pass",
+            "subpasses" : [
+                {
+                    "name" : "geometry and depth",
+                    "pipeline" : "graphics",
+                    "shader path" : "G10/shaders/geometry depth.json",
+                    "color attachments" : [
+                        "normal + specular"
+                    ],
+                    "depth attachments" : "depth"
+                },
+                {
+                    "name" : "lighting",
+                    "pipeline" : "graphics",
+                    "shader path" : "G10/shaders/lighting.json",
+                    "input attachments" : [
+                        "normal + specular"
+                    ],
+                    "color attachments" : [
+                        "diffuse",
+                        "specular"
+                    ],
+                    "depth attachments" : "depth"
+                },
+                {
+                    "name" : "forward shading",
+                    "pipeline" : "graphics",
+                    "shader path" : "G10/shaders/forward shading.json",
+                    "input attachments" : [
+                        "diffuse",
+                        "specular"
+                    ],
+                    "color attachments" : [
+                        "final"
+                    ],
+                    "depth attachments" : "depth"
+                }
+            ],
+            "dependencies" : [
+                {
+                    "flags" : "by region",
+                    "source subpass" : "geometry and depth",
+                    "destination subpass" : "lighting",
+                    "source stage" : "color attachment output",
+                    "destination stage" : "fragment shader",
+                    "source access" : "color attachment write",
+                    "destination access" : "shader read"
+                },
+                {
+                    "flags" : "by region",
+                    "source subpass" : "lighting",
+                    "destination subpass" : "forward shading",
+                    "source stage" : "color attachment output",
+                    "destination stage" : "fragment shader",
+                    "source access" : "color attachment write",
+                    "destination access" : "shader read"
+                }
+            ]
+        }
+    ],
+    "clear color" : [ 1.0, 1.0, 1.0, 1.0 ]
+}

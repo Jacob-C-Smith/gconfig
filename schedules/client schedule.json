@@ -1,0 +1,125 @@
+{
+    "name"         : "Client Schedule",
+    "threads"      : [
+        {
+            "name"        : "Render Thread",
+            "description" : "Presents frame N-1, draws frame N",
+            "tasks"       : [
+                {
+                    "task"        : "Render"
+                }
+            ]
+        },
+        {
+            "name" : "Main Thread",
+            "description" : "Game loop",
+            "tasks" : [
+                {
+                    "task" : "Input"
+                },
+                {
+                    "task" : "UI"
+                },
+                {
+                    "task" : "AI",
+                    "wait thread" : "Worker 2",
+                    "wait task"  : "Pre AI"
+                },
+                {
+                    "task" : "User Code"
+                },
+                {
+                    "task" : "Resolve Collisions",
+                    "wait thread" : "Render Thread",
+                    "wait task"  : "Render"
+                },
+                {
+                    "task" : "Update Forces"
+                },
+                {
+                    "task" : "Move Objects"
+                },
+                {
+                    "task" : "Copy State"
+                }
+            ]
+        },
+        {
+            "name" : "Worker 1",
+            "description" : "Audio and physics",
+            "tasks" : [
+                {
+                    "task"        : "Audio"
+                },
+                {
+                    "task"        : "Resolve Collisions"
+                },
+                {
+                    "task"        : "Update Forces"
+                },
+                {
+                    "task"        : "Move Objects"
+                }
+            ]
+        },
+        {
+            "name" : "Worker 2",
+            "description" : "Pre AI and physics",
+            "tasks" : [
+                {
+                    "task"        : "Pre AI"
+                },
+                {
+                    "task"        : "Resolve Collisions",
+                    "wait thread" : "Main Thread",
+                    "wait task"   : "User Code"
+                },
+                {
+                    "task"        : "Update Forces"
+                },
+                {
+                    "task"        : "Move Objects"
+                }
+            ]
+        },
+        {
+            "name" : "Worker 3",
+            "description" : "Server input and physics",
+            "tasks" : [
+                {
+                    "task" : "Discord Callbacks"
+                },
+                {
+                    "task"        : "Resolve Collisions",
+                    "wait thread" : "Main Thread",
+                    "wait task"   : "User Code"
+                },
+                {
+                    "task"        : "Animation"
+                },
+                {
+                    "task"        : "Move Objects"
+                }
+            ]
+        },
+        {
+            "name" : "Worker 4",
+            "description" : "Server output and physics",
+            "tasks" : [
+                {
+                    "task"        : "Resolve Collisions",
+                    "wait thread" : "Main Thread",
+                    "wait task"   : "User Code"
+                },
+                {
+                    "task"        : "Animation"
+                },
+                {
+                    "task"        : "Move Objects"
+                }
+            ]
+        }
+    ],
+    "main thread"  : "Main Thread",
+    "repeat" : true
+}

@@ -1,0 +1,35 @@
+{
+    "$schema"                    : "https://raw.githubusercontent.com/Jacob-C-Smith/G10-Schema/main/instance-schema.json",
+    "name"                       : "G10 Tester Instance",
+    "window width"               : 1280,
+    "window height"              : 720, 
+    "window title"               : "G10 Vulkan Debug",
+    "fullscreen"                 : false,
+    "cache part count"           : 128,
+    "cache material count"       : 128,
+    "cache shader count"         : 32,
+    "network bandwidth"          : 64,
+    "discord application ID"     : 1059248544785117244,
+    "loading thread count"       : 1,
+    "max buffered frames"        : 2,
+    "schedules"                  : [
+        "G10/schedules/client schedule.json"
+    ],
+    "vulkan device extensions"   : [
+        "VK_KHR_swapchain",
+        "VK_KHR_display",
+        "VK_KHR_display_swapchain",
+        "VK_EXT_mesh_shader"
+    ],
+    "vulkan instance extensions" : [
+        "VK_KHR_display", 
+        "VK_KHR_surface", 
+        "VK_KHR_win32_surface", 
+        "VK_EXT_debug_report", 
+        "VK_EXT_debug_utils",
+        "VK_EXT_descriptor_buffer"
+    ],
+    "vulkan validation layers"   : [
+        "VK_LAYER_KHRONOS_validation"
+    ]
+}

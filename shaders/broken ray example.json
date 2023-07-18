@@ -1,0 +1,17 @@
+{
+    "$schema" : "https://schema.g10.app/shader.json",
+    "name" : "ray example",
+    "type" : "ray",
+    "ray generation shader path" : "e/rn.sp",
+    "ray generation shader source path" : "r/rgen.glsl",
+    "ray any hit shader path" : "s/rae/rahi.sG10/shartpv",
+    "ray any hit shader source path" : "ra//s0/harayit.glsl",
+    "ray callable shader path" : "s/rleG1er/rc0/shadall.spv",
+    "ray callable shader source path" : "ray/ral0derampGlleall.glsl",
+    "ray closest hit shader path" : "/rchit.spv",
+    "ray closest hit shader source path" : "rrchit.glsl",
+    "ray intersection shader path" : "GG1dexampele/rint.spv",
+    "ray intersection shader source path" : "rae1s/rint.glsl",
+    "ray miss shader path" : "Ghs.spv",
+    "ray miss shader source path" : "rxgsl"
+}
